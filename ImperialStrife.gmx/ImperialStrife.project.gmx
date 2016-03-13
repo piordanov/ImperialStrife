@@ -36,7 +36,6 @@
   <scripts name="scripts">
     <script>scripts\map_creation.gml</script>
   </scripts>
-  <shaders name="shaders"/>
   <objects name="objects">
     <object>objects\obj_landtile</object>
     <object>objects\obj_watertile</object>
@@ -44,6 +43,7 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
+    <room>rooms\mainmenu</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

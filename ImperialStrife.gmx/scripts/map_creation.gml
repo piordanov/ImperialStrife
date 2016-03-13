@@ -4,59 +4,43 @@ area_max = 200
 width = 100
 height = 160
 
-while (n_islands-- > 0)
+
+
+cells = ds_grid_create(width, height);
+//make the whoel grid into "WATER"
+ds_grid_set_region(cells, 0, 0, width-1, height-1, "WATER");
+
+repeat(n_islands)
 {
-var x = floor(random(width));
-var y = floor(random(height));
+    var islex = floor(random(width));
+    var isley = floor(random(height));
+    ds_grid_set(cells,islex,isley, "LAND"); //starting point set to "LAND"
 
-int passes = area_min + floor(random(area_max - area_min));
-
-while (passes-- > 0)
-{
-//growIsland(x, y, (int)(CCRANDOM_0_1() * 8));
-}
-}
-
-
-for (int y = 0; y < 60; y++)
+    var passes = area_min + floor(random(area_max - area_min));
+    
+    
+    //randomly selects passes number of points close to the center 
+    repeat(passes)
     {
-    for (int x = 0; x < 100; x++)
-    {
-        int gid;
-
-        switch (this->getCellTypeAt(x, y))
+        //always start from the center
+        var xp = islex;
+        var yp = isley;
+        
+        while(ds_grid_get(cells,xp,yp) == "LAND")
         {
-            case MapModel::CellType::COAST:
-                gid = 1;
-                break;
-            case MapModel::CellType::LAND:
-                gid = 8;
-                break;
-            default:
-                gid = 11;
-                break;
+           if (xp >= width or yp >= height or xp < 0 or yp < 0)
+                break
+           var randx = floor(random_range(-1,2));
+           var randy = floor(random_range(-1,2));
+           
+           xp += randx;
+           yp += randy;
+           
         }
-
-        layer->setTileGID(gid, cocos2d::Vec2(x, y));
-    }
-    }
+        //we found a point equal to "WATER" so we change it to "LAND"
+        ds_grid_set(cells,xp,yp, "LAND");
+    } 
 }
 
-growIsland(int x, int y, int diag)
-{
-if (!inBounds(x, y)) return;
-
-if (cells[y][x] == CellType::LAND)
-{
-int dir = (diag + 6 + (int)(CCRANDOM_0_1() * 5)) % 8;
-int xp = x + cellAdj[dir][0];
-int yp = y + cellAdj[dir][1];
-growIsland(xp, yp, diag);
-}
-else
-{
-cells[y][x] = CellType::LAND;
-}
-}
 
 
