@@ -7,7 +7,7 @@ height = 160
 
 
 cells = ds_grid_create(width, height);
-//make the whoel grid into "WATER"
+//make the whole grid into "WATER"
 ds_grid_set_region(cells, 0, 0, width-1, height-1, "WATER");
 
 repeat(n_islands)
@@ -42,5 +42,16 @@ repeat(n_islands)
     } 
 }
 
-
-
+global.logfile = file_text_open_write(working_directory + "temp1.txt")
+{
+var i;
+for (i = 0; i < width; i += 1)
+{
+    var j;
+    for (j = 0; j < height; j += 1)
+    {
+        file_text_write_string(global.logfile, string(ds_grid_get(cells,i,j)) + string(":"));
+    }
+}
+}
+file_text_close(global.logfile)
