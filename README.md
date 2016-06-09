@@ -1,9 +1,9 @@
 # ImperialStrife
 ImperialStrife implemented in GameMaker
 <p>&nbsp</p>
-Description: A modern reinterpretation of a classic 2D turn based strategy game, Empire: The Wargame of the Century.
+<strong>Description:</strong> A modern reinterpretation of a classic 2D turn based strategy game, Empire: The Wargame of the Century.
 
-Website of the original Empire game: classicempire(dot)com
+<strong>Website of the original Empire game:</strong> classicempire(dot)com
 <p>&nbsp</p>
 Update Logs:
 Update 05.31.16:
