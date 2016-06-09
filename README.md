@@ -7,16 +7,16 @@ Website of the original Empire game: classicempire(dot)com
 
 Update Logs:
 Update 05.31.16:
-<li>
+<ul>
 Setup Github
-</li><li>
+</ul><ul>
 Made sure function that creates islands works correctly
-</li>
+</ul>
 Update 06.08.16
-<li>
+<ul>
 Create function to write map to screen
-</li>
+</ul>
 Update 06.10.16
-<li>
+<ul>
 Actually creating function to write map to screen
-</li>
+</ul>
