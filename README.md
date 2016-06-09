@@ -5,6 +5,10 @@ Description: A modern reinterpretation of a classic 2D turn based strategy game,
 
 Website of the original Empire game: classicempire(dot)com
 
+<p>
+
+</p>
+
 Update Logs:
 Update 05.31.16:
 <ul>
