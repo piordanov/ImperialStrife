@@ -14,7 +14,9 @@ Made sure function that creates islands works correctly
 </ul>
 Update 06.08.16
 <ul>
-Create function to write map to screen
+<s>Create function to write map to screen</s>
+</ul><ul>
+Watch Star_ videos
 </ul>
 Update 06.10.16
 <ul>
