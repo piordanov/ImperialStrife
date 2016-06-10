@@ -5,7 +5,8 @@ ImperialStrife implemented in GameMaker
 
 <strong>Website of the original Empire game:</strong> classicempire(dot)com
 <p>&nbsp</p>
-Update Logs:<p>&nbsp</p>
+Update Logs:
+<p>&nbsp</p>
 Update 05.31.16:
 <ul>
 Setup Github
