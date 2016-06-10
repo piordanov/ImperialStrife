@@ -1,4 +1,4 @@
-# ImperialStrife
+<strong># ImperialStrife</strong>
 ImperialStrife implemented in GameMaker
 <p>&nbsp</p>
 <strong>Description:</strong> A modern reinterpretation of a classic 2D turn based strategy game, Empire: The Wargame of the Century.
