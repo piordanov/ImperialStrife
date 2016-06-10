@@ -23,3 +23,6 @@ Update 06.10.16
 <ul>
 Actually creating function to write map to screen
 </ul>
+<ul>
+Create "camera" object to give user view of game
+</ul>
