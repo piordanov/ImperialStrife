@@ -40,6 +40,7 @@
     <object>objects\obj_landtile</object>
     <object>objects\obj_watertile</object>
     <object>objects\obj_map</object>
+    <object>objects\obj_camera</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
