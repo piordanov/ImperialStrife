@@ -5,6 +5,11 @@ ImperialStrife implemented in GameMaker
 
 <strong>Website of the original Empire game:</strong> classicempire(dot)com
 <p>&nbsp</p>
+<strong>Tutorials Used:</strong>
+<ul>
+http://yal.cc/gamemaker-click-n-drag-to-pan-view/
+</ul>
+<p>&nbsp</p>
 Update Logs:
 <p></p>
 Update 05.31.16:
