@@ -4,7 +4,8 @@ area_max = 200
 width = 100
 height = 160
 
-
+randomize();
+//display_set_gui_size(800,600);
 
 cells = ds_grid_create(width, height);
 //make the whole grid into "WATER"
@@ -29,7 +30,7 @@ repeat(n_islands)
         while(ds_grid_get(cells,xp,yp) == "LAND")
         {
            if (xp >= width or yp >= height or xp < 0 or yp < 0)
-                break
+                break;
            var randx = floor(random_range(-1,2));
            var randy = floor(random_range(-1,2));
            
@@ -55,3 +56,23 @@ for (i = 0; i < width; i += 1)
 }
 }
 file_text_close(global.logfile)
+
+//place tiles in the room
+
+x_i = 0;
+for(i = 0; i < width; i += 1)
+{
+    y_j = 0;
+    for(j = 0; j < height; j += 1)
+    {
+        if(ds_grid_get(cells,i,j) == "LAND"){
+            instance_create(x_i,y_j,obj_landtile);
+        }
+        if(ds_grid_get(cells,i,j) == "WATER"){
+            instance_create(x_i,y_j,obj_watertile);
+        }
+        
+        y_j = y_j + 30;
+    }
+    x_i = x_i + 30;
+}
