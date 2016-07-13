@@ -40,6 +40,10 @@ repeat(n_islands)
         }
         //we found a point equal to "WATER" so we change it to "LAND"
         ds_grid_set(cells,xp,yp, "LAND");
+        if(random_range(0,1) < 0.10){
+            islex = xp;
+            isley = yp;
+        }
     } 
 }
 
