@@ -20,6 +20,7 @@
   <width>32</width>
   <height>32</height>
   <frames>
-    <frame index="0">images\blue_0.png</frame>
+    <frame index="0">images\water_0.png</frame>
+    <frame index="1">images\water_1.png</frame>
   </frames>
 </sprite>

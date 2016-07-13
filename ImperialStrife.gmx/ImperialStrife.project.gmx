@@ -28,7 +28,7 @@
     <sprites name="Tiles">
       <sprite>sprites\basetile</sprite>
       <sprite>sprites\land</sprite>
-      <sprite>sprites\blue</sprite>
+      <sprite>sprites\water</sprite>
     </sprites>
     <sprites name="Units">
       <sprite>sprites\unit</sprite>
