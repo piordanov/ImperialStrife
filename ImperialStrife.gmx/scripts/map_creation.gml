@@ -14,11 +14,11 @@ ds_grid_set_region(cells, 0, 0, width-1, height-1, "WATER");
 
 repeat (n_islands)
 {
-    var islex = floor(random(width));
-    var isley = floor(random(height));
+    var islex = irandom(width - 1);
+    var isley = irandom(height - 1);
     ds_grid_set(cells,islex,isley, "LAND"); //starting point set to "LAND"
 
-    var passes = area_min + floor(random(area_max - area_min));
+    var passes = irandom_range(area_min, area_max);
     
     //randomly selects passes number of points close to the center 
     repeat (passes)
