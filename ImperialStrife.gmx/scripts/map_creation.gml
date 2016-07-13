@@ -1,8 +1,9 @@
 n_islands = 50
 area_min = 15
 area_max = 150
-width = 100
-height = 160
+width = 160
+height = 100
+anti_circ = 0.2
 
 randomize();
 //display_set_gui_size(800,600);
@@ -11,7 +12,7 @@ cells = ds_grid_create(width, height);
 //make the whole grid into "WATER"
 ds_grid_set_region(cells, 0, 0, width-1, height-1, "WATER");
 
-repeat(n_islands)
+repeat (n_islands)
 {
     var islex = floor(random(width));
     var isley = floor(random(height));
@@ -19,30 +20,37 @@ repeat(n_islands)
 
     var passes = area_min + floor(random(area_max - area_min));
     
-    
     //randomly selects passes number of points close to the center 
-    repeat(passes)
+    repeat (passes)
     {
         //always start from the center
         var xp = islex;
         var yp = isley;
         
-        while(ds_grid_get(cells,xp,yp) == "LAND")
+        //randomly walk N/S/E/W seeking water
+        while (ds_grid_get(cells,xp,yp) == "LAND")
         {
-           if (xp >= width or yp >= height or xp < 0 or yp < 0)
-                break;
-           var randx = floor(random_range(-1,2));
-           var randy = floor(random_range(-1,2));
-           
-           xp += randx;
-           yp += randy;
-           
+            if (irandom(1) == 0)
+            {
+                xp += choose(-1, 1);
+            }
+            else
+            {
+                yp += choose(-1, 1);
+            }
         }
-        //we found a point equal to "WATER" so we change it to "LAND"
-        ds_grid_set(cells,xp,yp, "LAND");
-        if(random_range(0,1) < 0.10){
-            islex = xp;
-            isley = yp;
+        
+        if (xp < width and yp < height and xp >= 0 and yp >= 0)
+        {
+            //we found a point equal to "WATER" so we change it to "LAND"
+            ds_grid_set(cells,xp,yp, "LAND");
+            
+            //occasionally recenter the island, preventing circular blobs
+            if (random(1.0) < anti_circ)
+            {
+                islex = xp;
+                isley = yp;
+            }
         }
     } 
 }
