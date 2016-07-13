@@ -28,8 +28,9 @@
             <string>dragging = false
 view_xview = 0
 view_yview = 0
-view_wview = room_width/2;
-view_hview = room_height/2;
+view_wview = room_width;
+view_hview = room_height;
+move_speed = 10;
 //look at tutorial here http://yal.cc/gamemaker-click-n-drag-to-pan-view/
 </string>
           </argument>
@@ -86,6 +87,7 @@ show_debug_message(string(view_xview) + ", " + string(view_yview))
           <argument>
             <kind>1</kind>
             <string>view_hview = view_hview - 10
+view_wview = view_wview - 10
 </string>
           </argument>
         </arguments>
@@ -109,6 +111,7 @@ show_debug_message(string(view_xview) + ", " + string(view_yview))
           <argument>
             <kind>1</kind>
             <string>view_hview = view_hview + 10
+view_wview = view_wview + 10
 </string>
           </argument>
         </arguments>
@@ -131,7 +134,7 @@ show_debug_message(string(view_xview) + ", " + string(view_yview))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_yview[0] = view_yview[0] + 3
+            <string>view_yview[0] = view_yview[0] + move_speed
 </string>
           </argument>
         </arguments>
@@ -154,7 +157,7 @@ show_debug_message(string(view_xview) + ", " + string(view_yview))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_xview[0] = view_xview[0] + 3
+            <string>view_xview[0] = view_xview[0] + move_speed
 </string>
           </argument>
         </arguments>
@@ -177,7 +180,7 @@ show_debug_message(string(view_xview) + ", " + string(view_yview))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_yview[0] = view_yview[0] - 3
+            <string>view_yview[0] = view_yview[0] - move_speed
 </string>
           </argument>
         </arguments>
@@ -200,7 +203,7 @@ show_debug_message(string(view_xview) + ", " + string(view_yview))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_xview[0] = view_xview[0] - 3
+            <string>view_xview[0] = view_xview[0] - move_speed
 </string>
           </argument>
         </arguments>

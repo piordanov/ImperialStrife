@@ -1,6 +1,6 @@
-n_islands = 5
-area_min = 20
-area_max = 200
+n_islands = 50
+area_min = 15
+area_max = 150
 width = 100
 height = 160
 
@@ -58,7 +58,7 @@ for (i = 0; i < width; i += 1)
 file_text_close(global.logfile)
 
 //place tiles in the room
-
+tile_size = 32;
 x_i = 0;
 for(i = 0; i < width; i += 1)
 {
@@ -68,12 +68,13 @@ for(i = 0; i < width; i += 1)
         if(ds_grid_get(cells,i,j) == "LAND"){
             instance_create(x_i,y_j,obj_landtile);
         }
-        if(ds_grid_get(cells,i,j) == "WATER"){
+        else {
             instance_create(x_i,y_j,obj_watertile);
         }
         
-        y_j = y_j + 30;
+        y_j = y_j + tile_size;
     }
-    x_i = x_i + 30;
+    x_i = x_i + tile_size;
 }
 
+instance_create(0,0,obj_unit)
