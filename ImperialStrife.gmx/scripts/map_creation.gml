@@ -152,12 +152,7 @@ for(i = 0; i < width; i += 1)
         }
         else
         {
-            var seatile = instance_create(x_i,y_j,obj_watertile);
-            seatile.image_speed = 0;
-            if (ds_grid_get(cells,i,j) == "COAST")
-            {
-                seatile.image_index = 1;
-            }
+            instance_create(x_i,y_j,obj_watertile);
         }
         
         y_j = y_j + tile_size;

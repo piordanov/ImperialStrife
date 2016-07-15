@@ -29,6 +29,23 @@
       <sprite>sprites\basetile</sprite>
       <sprite>sprites\land</sprite>
       <sprite>sprites\water</sprite>
+      <sprite>sprites\coast_a0</sprite>
+      <sprite>sprites\coast_a1</sprite>
+      <sprite>sprites\coast_a2</sprite>
+      <sprite>sprites\coast_a3</sprite>
+      <sprite>sprites\coast_b0</sprite>
+      <sprite>sprites\coast_b1</sprite>
+      <sprite>sprites\coast_b2</sprite>
+      <sprite>sprites\coast_b3</sprite>
+      <sprite>sprites\coast_c0</sprite>
+      <sprite>sprites\coast_c1</sprite>
+      <sprite>sprites\coast_c2</sprite>
+      <sprite>sprites\coast_c3</sprite>
+      <sprite>sprites\coast_d0</sprite>
+      <sprite>sprites\coast_d1</sprite>
+      <sprite>sprites\coast_d2</sprite>
+      <sprite>sprites\coast_d3</sprite>
+      <sprite>sprites\coast_e0</sprite>
     </sprites>
     <sprites name="Units">
       <sprite>sprites\unit</sprite>
@@ -41,10 +58,12 @@
   </scripts>
   <objects name="objects">
     <object>objects\obj_landtile</object>
-    <object>objects\obj_watertile</object>
     <object>objects\obj_map</object>
     <object>objects\obj_camera</object>
     <object>objects\obj_unit</object>
+    <object>objects\obj_tilebase</object>
+    <object>objects\obj_watertile</object>
+    <object>objects\obj_coastoverlay</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
