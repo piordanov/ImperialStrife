@@ -5,6 +5,14 @@ width = 160
 height = 100
 anti_circ = 0.2
 
+// indices of relative directions:
+//
+// 7  0  1
+//
+// 6  .  2
+//
+// 5  4  3
+
 dir_x[0] = 0
 dir_x[1] = 1
 dir_x[2] = 1
@@ -22,6 +30,67 @@ dir_y[4] = 1
 dir_y[5] = 1
 dir_y[6] = 0
 dir_y[7] = -1
+
+var coast_prio;
+
+coast_prio[0] = coast_e0
+coast_prio[1] = coast_d0
+coast_prio[2] = coast_d1
+coast_prio[3] = coast_d2
+coast_prio[4] = coast_d3
+coast_prio[5] = coast_c0
+coast_prio[6] = coast_c1
+coast_prio[7] = coast_c2
+coast_prio[8] = coast_c3
+coast_prio[9] = coast_b0
+coast_prio[10] = coast_b1
+coast_prio[11] = coast_b2
+coast_prio[12] = coast_b3
+coast_prio[13] = coast_a0
+coast_prio[14] = coast_a1
+coast_prio[15] = coast_a2
+coast_prio[16] = coast_a3
+
+var coast_mask;
+
+coast_mask[0] = "01234567"
+coast_mask[1] = "0123457"
+coast_mask[2] = "1234567"
+coast_mask[3] = "0134567"
+coast_mask[4] = "0123567"
+coast_mask[5] = "01237"
+coast_mask[6] = "12345"
+coast_mask[7] = "34567"
+coast_mask[8] = "01567"
+coast_mask[9] = "017"
+coast_mask[10] = "123"
+coast_mask[11] = "345"
+coast_mask[12] = "567"
+coast_mask[13] = "7"
+coast_mask[14] = "1"
+coast_mask[15] = "3"
+coast_mask[16] = "5"
+
+/*
+var coast_masks = ds_map_create();
+ds_map_add(coast_masks, coast_e0, "01234567");
+ds_map_add(coast_masks, coast_d3, "0123567");
+ds_map_add(coast_masks, coast_d2, "0134567");
+ds_map_add(coast_masks, coast_d1, "1234567");
+ds_map_add(coast_masks, coast_d0, "0123457");
+ds_map_add(coast_masks, coast_c3, "01567");
+ds_map_add(coast_masks, coast_c2, "34567");
+ds_map_add(coast_masks, coast_c1, "12345");
+ds_map_add(coast_masks, coast_c0, "01237");
+ds_map_add(coast_masks, coast_b3, "567");
+ds_map_add(coast_masks, coast_b2, "345");
+ds_map_add(coast_masks, coast_b1, "123");
+ds_map_add(coast_masks, coast_b0, "017");
+ds_map_add(coast_masks, coast_a3, "5");
+ds_map_add(coast_masks, coast_a2, "3");
+ds_map_add(coast_masks, coast_a1, "1");
+ds_map_add(coast_masks, coast_a0, "7");
+*/
 
 randomize();
 //display_set_gui_size(800,600);
@@ -146,13 +215,53 @@ for(i = 0; i < width; i += 1)
     y_j = 0;
     for(j = 0; j < height; j += 1)
     {
-        if (ds_grid_get(cells,i,j) == "LAND")
+        switch (ds_grid_get(cells,i,j))
         {
+        case "LAND":
             instance_create(x_i,y_j,obj_landtile);
-        }
-        else
-        {
+            break;
+        case "COAST":
+            var land_adj;
+            var k;
+            for (k = 0; k < 8; k++)
+            {
+                land_adj[k] = (ds_grid_get(cells, i + dir_x[k], j + dir_y[k]) == "LAND");
+            }
+            
+            var sc;
+            for (sc = 0; sc <= 1; sc++)
+            {
+                var m;
+                for (m = 0; m < array_length_1d(coast_mask); m++)
+                {
+                    var excess = false;
+                    for (k = sc; k < 8; k += 2)
+                    {
+                        if ((land_adj[k] == false) and (string_pos(string(k), coast_mask[m]) != 0))
+                        {
+                            excess = true;
+                            break;
+                        }
+                    }
+                    
+                    if (excess == false)
+                    {
+                        with (instance_create(x_i, y_j, obj_coastoverlay))
+                        {
+                            sprite_index = coast_prio[m];
+                        }
+                        
+                        var i_c;
+                        for (i_c = 1; i_c <= string_length(coast_mask[m]); i_c++)
+                        {
+                            land_adj[floor(real(string_char_at(coast_mask[m], i_c)))] = false;
+                        }
+                    }
+                }
+            }
+        case "WATER":
             instance_create(x_i,y_j,obj_watertile);
+            break;
         }
         
         y_j = y_j + tile_size;
