@@ -25,9 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if ((image_index == 0) and (random(1.0) &lt; 0.005))
+            <string>if (random(1.0) &lt; 0.004)
 {
-    image_speed = 0.16;
+    image_speed = 0.2;
 }
 </string>
           </argument>

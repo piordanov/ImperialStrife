@@ -183,7 +183,7 @@ for (i = 0; i < width; i += 1)
 file_text_close(global.logfile)
 
 //place tiles in the room
-tile_size = 32;
+tile_size = 128;
 x_i = 0;
 for(i = 0; i < width; i += 1)
 {
