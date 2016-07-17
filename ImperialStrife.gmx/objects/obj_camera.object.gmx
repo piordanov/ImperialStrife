@@ -82,6 +82,11 @@ view_hview[0] = y_fov;
           <argument>
             <kind>1</kind>
             <string>x_fov -= zoom_speed;
+
+if (x_fov &lt; room_width)
+{
+    x_fov = room_width;
+}
 </string>
           </argument>
         </arguments>
