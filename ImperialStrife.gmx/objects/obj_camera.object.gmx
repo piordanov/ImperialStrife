@@ -25,13 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_xview = 0
-view_yview = 0
-view_wview = room_width;
-view_hview = room_height;
-move_speed = 70;
-zoom_factor = 1
-//look at tutorial here http://yal.cc/gamemaker-click-n-drag-to-pan-view/
+            <string>x_center = 80 * 128;
+y_center = 50 * 128;
+x_fov = 128 * 160;
 </string>
           </argument>
         </arguments>
@@ -54,9 +50,15 @@ zoom_factor = 1
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_hview = room_height * zoom_factor;
-view_wview = room_width * zoom_factor;
+            <string>y_fov = x_fov * (room_height / room_width);
 
+pan_speed = 0.02 * x_fov;
+zoom_speed = 0.04 * x_fov;
+
+view_xview[0] = x_center - (x_fov / 2);
+view_yview[0] = y_center - (y_fov / 2);
+view_wview[0] = x_fov;
+view_hview[0] = y_fov;
 </string>
           </argument>
         </arguments>
@@ -79,10 +81,7 @@ view_wview = room_width * zoom_factor;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if(zoom_factor &gt; 0)
-{
-    zoom_factor -= 0.1
-}
+            <string>x_fov -= zoom_speed;
 </string>
           </argument>
         </arguments>
@@ -105,7 +104,7 @@ view_wview = room_width * zoom_factor;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>zoom_factor += 0.1
+            <string>x_fov += zoom_speed;
 </string>
           </argument>
         </arguments>
@@ -128,7 +127,7 @@ view_wview = room_width * zoom_factor;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_yview[0] = view_yview[0] + move_speed
+            <string>y_center += pan_speed;
 </string>
           </argument>
         </arguments>
@@ -151,7 +150,7 @@ view_wview = room_width * zoom_factor;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_xview[0] = view_xview[0] + move_speed
+            <string>x_center += pan_speed;
 </string>
           </argument>
         </arguments>
@@ -174,7 +173,7 @@ view_wview = room_width * zoom_factor;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_yview[0] = view_yview[0] - move_speed
+            <string>y_center -= pan_speed;
 </string>
           </argument>
         </arguments>
@@ -197,7 +196,7 @@ view_wview = room_width * zoom_factor;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_xview[0] = view_xview[0] - move_speed
+            <string>x_center -= pan_speed;
 </string>
           </argument>
         </arguments>
