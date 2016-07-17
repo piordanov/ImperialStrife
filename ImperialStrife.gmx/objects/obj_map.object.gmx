@@ -63,9 +63,12 @@ coast_corner[7] = coast_a0;
 
 var tile_size = 128;
 
-cells = gen_map(160, 100, 50, 15, 150, 0.2);
-spawn_city(cells, 20, 20);
-spawn_city(cells, 140, 80);
+cells = gen_map(160, 100, 80, 10, 60, 0.3);
+
+repeat (40)
+{
+    spawn_city(cells, irandom(159), irandom(99));
+}
 
 var x_i = 0;
 var i;

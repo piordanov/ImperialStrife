@@ -38,6 +38,7 @@ repeat (n_islands)
     }
 
     var passes = irandom_range(area_min, area_max);
+    var fwd = irandom(7);
     
     repeat (passes)
     {
@@ -48,14 +49,9 @@ repeat (n_islands)
         // randomly walk N/S/E/W seeking coast
         while (ds_grid_get(cells, xp, yp) == "LAND")
         {
-            if (irandom(1) == 0)
-            {
-                xp += choose(-1, 1);
-            }
-            else
-            {
-                yp += choose(-1, 1);
-            }
+            fwd = (fwd + choose(0, 1, 7)) % 8;
+            xp += dir_x(fwd);
+            yp += dir_y(fwd);
         }
         
         if (xp < width and yp < height and xp >= 0 and yp >= 0)
