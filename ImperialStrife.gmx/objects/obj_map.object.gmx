@@ -64,6 +64,8 @@ coast_corner[7] = coast_a0;
 var tile_size = 128;
 
 cells = gen_map(160, 100, 50, 15, 150, 0.2);
+spawn_city(cells, 20, 20);
+spawn_city(cells, 140, 80);
 
 var x_i = 0;
 var i;
@@ -75,6 +77,8 @@ for(i = 0; i &lt; ds_grid_width(cells); i++)
     {
         switch (ds_grid_get(cells, i, j))
         {
+        case "CITY":
+            instance_create(x_i, y_j, obj_city);
         case "LAND":
             instance_create(x_i, y_j, obj_landtile);
             break;
@@ -83,7 +87,8 @@ for(i = 0; i &lt; ds_grid_width(cells); i++)
             var k;
             for (k = 0; k &lt; 8; k++)
             {
-                land_adj[k] = (ds_grid_get(cells, i + dir_x(k), j + dir_y(k)) == "LAND");
+                var c = ds_grid_get(cells, i + dir_x(k), j + dir_y(k));
+                land_adj[k] = (c == "LAND" or c == "CITY");
             }
             
             var m;
