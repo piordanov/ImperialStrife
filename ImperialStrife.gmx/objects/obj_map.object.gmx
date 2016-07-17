@@ -82,6 +82,7 @@ for(i = 0; i &lt; ds_grid_width(cells); i++)
         {
         case "CITY":
             instance_create(x_i, y_j, obj_city);
+            break;
         case "LAND":
             instance_create(x_i, y_j, obj_landtile);
             break;
