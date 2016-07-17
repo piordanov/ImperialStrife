@@ -1,31 +1,3 @@
-// indices of relative directions:
-//
-// 7  0  1
-//
-// 6  .  2
-//
-// 5  4  3
-
-var dir_x;
-dir_x[0] = 0;
-dir_x[1] = 1;
-dir_x[2] = 1;
-dir_x[3] = 1;
-dir_x[4] = 0;
-dir_x[5] = -1;
-dir_x[6] = -1;
-dir_x[7] = -1;
-
-var dir_y;
-dir_y[0] = -1;
-dir_y[1] = -1;
-dir_y[2] = 0;
-dir_y[3] = 1;
-dir_y[4] = 1;
-dir_y[5] = 1;
-dir_y[6] = 0;
-dir_y[7] = -1;
-
 var width = argument0;
 var height = argument1;
 var n_islands = argument2;
@@ -56,8 +28,8 @@ repeat (n_islands)
     var i;
     for (i = 0; i < 8; i++)
     {
-        var xpp = islex + dir_x[i];
-        var ypp = isley + dir_y[i];
+        var xpp = islex + dir_x(i);
+        var ypp = isley + dir_y(i);
         
         if (ds_grid_get(cells, xpp, ypp) == "WATER")
         {
@@ -93,8 +65,8 @@ repeat (n_islands)
             
             for (i = 0; i < 8; i += 1)
             {
-                var xpp = xp + dir_x[i];
-                var ypp = yp + dir_y[i];
+                var xpp = xp + dir_x(i);
+                var ypp = yp + dir_y(i);
                 if (ds_grid_get(cells, xpp, ypp) == "WATER")
                 {
                     ds_grid_set(cells, xpp, ypp, "COAST");
@@ -123,8 +95,8 @@ repeat (n_islands)
                 var no_water = true;
                 for (i = 0; i < 8; i++)
                 {
-                    var xp = i_x + dir_x[i];
-                    var yp = i_y + dir_y[i];
+                    var xp = i_x + dir_x(i);
+                    var yp = i_y + dir_y(i);
                     if (ds_grid_get(cells, xp, yp) == "WATER")
                     {
                         no_water = false;

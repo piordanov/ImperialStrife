@@ -55,6 +55,9 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\gen_map.gml</script>
+    <script>scripts\spawn_city.gml</script>
+    <script>scripts\dir_x.gml</script>
+    <script>scripts\dir_y.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_landtile</object>
