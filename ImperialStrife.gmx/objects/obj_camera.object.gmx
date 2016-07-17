@@ -25,12 +25,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>dragging = false
-view_xview = 0
+            <string>view_xview = 0
 view_yview = 0
 view_wview = room_width;
 view_hview = room_height;
-move_speed = 10;
+move_speed = 70;
+zoom_factor = 1
 //look at tutorial here http://yal.cc/gamemaker-click-n-drag-to-pan-view/
 </string>
           </argument>
@@ -54,16 +54,9 @@ move_speed = 10;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (dragging) {
-    // actual dragging logic:
-    view_xview = view_xview + drag_x - mouse_x
-    view_yview = view_yview + drag_y - mouse_y
-    // make sure view doesn't go outside the room:
-    //view_xview = max(0, min(view_xview, room_width - view_wview))
-    //view_yview = max(0, min(view_yview, room_height - view_hview))
-}
+            <string>view_hview = room_height * zoom_factor;
+view_wview = room_width * zoom_factor;
 
-show_debug_message(string(view_xview) + ", " + string(view_yview))
 </string>
           </argument>
         </arguments>
@@ -86,8 +79,10 @@ show_debug_message(string(view_xview) + ", " + string(view_yview))
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_hview = view_hview - 10
-view_wview = view_wview - 10
+            <string>if(zoom_factor &gt; 0)
+{
+    zoom_factor -= 0.1
+}
 </string>
           </argument>
         </arguments>
@@ -110,8 +105,7 @@ view_wview = view_wview - 10
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>view_hview = view_hview + 10
-view_wview = view_wview + 10
+            <string>zoom_factor += 0.1
 </string>
           </argument>
         </arguments>
@@ -204,54 +198,6 @@ view_wview = view_wview + 10
           <argument>
             <kind>1</kind>
             <string>view_xview[0] = view_xview[0] - move_speed
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="8">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>dragging = false
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="5">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>dragging = true
-drag_x = mouse_x
-drag_y = mouse_y
 </string>
           </argument>
         </arguments>
