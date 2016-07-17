@@ -36,18 +36,25 @@ var anti_circ = argument5;
 randomize();
 
 var cells = ds_grid_create(width, height);
-
-//make the whole grid into "WATER"
 ds_grid_set_region(cells, 0, 0, width-1, height-1, "WATER");
 
 repeat (n_islands)
 {
-    var islex = irandom(width - 1);
-    var isley = irandom(height - 1);
-    ds_grid_set(cells,islex,isley, "LAND"); //starting point set to "LAND"
+    var islex;
+    var isley;
+    
+    // limit number of times we try to avoid land, in case there is no more water
+    var try = 30;
+    do
+    {
+        islex = irandom(width - 1);
+        isley = irandom(height - 1);
+    } until ((try-- <= 0) or (ds_grid_get(cells, islex, isley) == "WATER"));
+    
+    ds_grid_set(cells, islex, isley, "LAND");
     
     var i;
-    for (i = 0; i < 8; i += 1)
+    for (i = 0; i < 8; i++)
     {
         var xpp = islex + dir_x[i];
         var ypp = isley + dir_y[i];
@@ -60,15 +67,14 @@ repeat (n_islands)
 
     var passes = irandom_range(area_min, area_max);
     
-    //randomly selects passes number of points close to the center 
     repeat (passes)
     {
-        //always start from the center
+        // the plan is to start at the "center" of the island and find coastline
         var xp = islex;
         var yp = isley;
         
-        //randomly walk N/S/E/W seeking coast
-        while (ds_grid_get(cells,xp,yp) == "LAND")
+        // randomly walk N/S/E/W seeking coast
+        while (ds_grid_get(cells, xp, yp) == "LAND")
         {
             if (irandom(1) == 0)
             {
@@ -82,8 +88,8 @@ repeat (n_islands)
         
         if (xp < width and yp < height and xp >= 0 and yp >= 0)
         {
-            //we found a point equal to "COAST" so we change it to "LAND"
-            ds_grid_set(cells,xp,yp, "LAND");
+            // we found a point equal to "COAST" so we change it to "LAND"
+            ds_grid_set(cells, xp, yp, "LAND");
             
             for (i = 0; i < 8; i += 1)
             {
@@ -95,7 +101,7 @@ repeat (n_islands)
                 }
             }
             
-            //occasionally recenter the island, preventing circular blobs
+            // occasionally recenter the island, preventing circular blobs
             if (random(1.0) < anti_circ)
             {
                 islex = xp;
@@ -107,9 +113,10 @@ repeat (n_islands)
     var i_x;
     var i_y;
     
-    for (i_x = 0; i_x < width; i_x += 1)
+    // remove internal coastline which doesn't actually touch water
+    for (i_x = 0; i_x < width; i_x++)
     {
-        for (i_y = 0; i_y < height; i_y += 1)
+        for (i_y = 0; i_y < height; i_y++)
         {
             if (ds_grid_get(cells, i_x, i_y) == "COAST")
             {
