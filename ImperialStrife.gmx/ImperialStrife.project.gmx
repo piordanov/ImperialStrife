@@ -54,7 +54,7 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\map_creation.gml</script>
+    <script>scripts\gen_map.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_landtile</object>

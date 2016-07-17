@@ -11,41 +11,150 @@
     <event eventtype="0" enumb="0">
       <action>
         <libid>1</libid>
-        <id>601</id>
-        <kind>0</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
         <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_execute_script</functionname>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
           <argument>
-            <kind>9</kind>
-            <script>map_creation</script>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string></string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string></string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string></string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string></string>
-          </argument>
-          <argument>
-            <kind>0</kind>
-            <string></string>
+            <kind>1</kind>
+            <string>var dir_x;
+dir_x[0] = 0;
+dir_x[1] = 1;
+dir_x[2] = 1;
+dir_x[3] = 1;
+dir_x[4] = 0;
+dir_x[5] = -1;
+dir_x[6] = -1;
+dir_x[7] = -1;
+
+var dir_y;
+dir_y[0] = -1;
+dir_y[1] = -1;
+dir_y[2] = 0;
+dir_y[3] = 1;
+dir_y[4] = 1;
+dir_y[5] = 1;
+dir_y[6] = 0;
+dir_y[7] = -1;
+
+var coast_prio;
+coast_prio[0] = coast_e0
+coast_prio[1] = coast_d0
+coast_prio[2] = coast_d1
+coast_prio[3] = coast_d2
+coast_prio[4] = coast_d3
+coast_prio[5] = coast_c0
+coast_prio[6] = coast_c1
+coast_prio[7] = coast_c2
+coast_prio[8] = coast_c3
+coast_prio[9] = coast_b0
+coast_prio[10] = coast_b1
+coast_prio[11] = coast_b2
+coast_prio[12] = coast_b3
+
+var coast_mask;
+coast_mask[0] = "01234567"
+coast_mask[1] = "0123457"
+coast_mask[2] = "1234567"
+coast_mask[3] = "0134567"
+coast_mask[4] = "0123567"
+coast_mask[5] = "01237"
+coast_mask[6] = "12345"
+coast_mask[7] = "34567"
+coast_mask[8] = "01567"
+coast_mask[9] = "017"
+coast_mask[10] = "123"
+coast_mask[11] = "345"
+coast_mask[12] = "567"
+
+var coast_corner;
+coast_corner[1] = coast_a1;
+coast_corner[3] = coast_a2;
+coast_corner[5] = coast_a3;
+coast_corner[7] = coast_a0;
+
+var tile_size = 128;
+
+cells = gen_map(160, 100, 50, 15, 150, 0.2);
+
+var x_i = 0;
+var i;
+for(i = 0; i &lt; ds_grid_width(cells); i++)
+{
+    var y_j = 0;
+    var j;
+    for(j = 0; j &lt; ds_grid_height(cells); j++)
+    {
+        switch (ds_grid_get(cells, i, j))
+        {
+        case "LAND":
+            instance_create(x_i, y_j, obj_landtile);
+            break;
+        case "COAST":
+            var land_adj;
+            var k;
+            for (k = 0; k &lt; 8; k++)
+            {
+                land_adj[k] = (ds_grid_get(cells, i + dir_x[k], j + dir_y[k]) == "LAND");
+            }
+            
+            var m;
+            for (m = 0; m &lt; array_length_1d(coast_mask); m++)
+            {
+                var excess = false;
+                for (k = 0; k &lt; 8; k += 2)
+                {
+                    var contains = (string_pos(string(k), coast_mask[m]) != 0)
+                    if ((land_adj[k] == false) and (contains == true))
+                    {
+                        excess = true;
+                        break;
+                    }
+                }
+                
+                if (excess == false)
+                {
+                    with (instance_create(x_i, y_j, obj_coastoverlay))
+                    {
+                        sprite_index = coast_prio[m];
+                    }
+                    
+                    var i_c;
+                    for (i_c = 1; i_c &lt;= string_length(coast_mask[m]); i_c++)
+                    {
+                        land_adj[floor(real(string_char_at(coast_mask[m], i_c)))] = false;
+                    }
+                }
+            }
+            
+            for (k = 1; k &lt; 8; k += 2)
+            {
+                if (land_adj[k] == true)
+                {
+                    with (instance_create(x_i, y_j, obj_coastoverlay))
+                    {
+                        sprite_index = coast_corner[k];
+                    }
+                }
+            }
+        case "WATER":
+            instance_create(x_i, y_j, obj_watertile);
+            break;
+        }
+        
+        y_j = y_j + tile_size;
+    }
+    x_i = x_i + tile_size;
+}
+</string>
           </argument>
         </arguments>
       </action>
