@@ -5,7 +5,7 @@ var yt = argument2;
 var width = ds_grid_width(cells);
 var height = ds_grid_height(cells);
 
-while (ds_grid_get(cells, xt, yt) != "LAND")
+while (true)
 {
     var xp;
     var yp;
@@ -17,6 +17,26 @@ while (ds_grid_get(cells, xt, yt) != "LAND")
     } until (xp >= 0 and xp < width and yp >= 0 and yp < height)
     xt = xp;
     yt = yp;
+    
+    if (ds_grid_get(cells, xt, yt) == "LAND")
+    {
+        var d;
+        var no_city = true;
+        for (d = 0; d < 8; d++)
+        {
+            if (ds_grid_get(cells, xt + dir_x(d), yt + dir_y(d)) == "CITY")
+            {
+                no_city = false;
+                break;
+            }
+
+        }
+        
+        if (no_city)
+        {
+            ds_grid_set(cells, xt, yt, "CITY");
+            return 0;
+        }
+    }
 }
 
-ds_grid_set(cells, xt, yt, "CITY");
