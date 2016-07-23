@@ -25,7 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var coast_prio;
+            <string>width = 160;
+height = 100;
+
+var coast_prio;
 coast_prio[0] = coast_e0
 coast_prio[1] = coast_d0
 coast_prio[2] = coast_d1
@@ -63,12 +66,14 @@ coast_corner[7] = coast_a0;
 
 var tile_size = 128;
 
-cells = gen_map(160, 100, 80, 10, 60, 0.3);
+var cells = gen_map(width, height, 80, 10, 60, 0.3);
 
 repeat (40)
 {
-    spawn_city(cells, irandom(159), irandom(99));
+    spawn_city(cells, irandom(width - 1), irandom(height - 1));
 }
+
+tiles = ds_grid_create(width, height);
 
 var x_i = 0;
 var i;
@@ -78,13 +83,16 @@ for(i = 0; i &lt; ds_grid_width(cells); i++)
     var j;
     for(j = 0; j &lt; ds_grid_height(cells); j++)
     {
+        var tile;
         switch (ds_grid_get(cells, i, j))
         {
         case "CITY":
-            instance_create(x_i, y_j, obj_city);
+            tile = instance_create(x_i, y_j, obj_city);
+            tile.type = "CITY";
             break;
         case "LAND":
-            instance_create(x_i, y_j, obj_landtile);
+            tile = instance_create(x_i, y_j, obj_landtile);
+            tile.type = "LAND";
             break;
         case "COAST":
             var land_adj;
@@ -135,9 +143,12 @@ for(i = 0; i &lt; ds_grid_width(cells); i++)
                 }
             }
         case "WATER":
-            instance_create(x_i, y_j, obj_watertile);
+            tile = instance_create(x_i, y_j, obj_watertile);
+            tile.type = "WATER";
             break;
         }
+        
+        ds_grid_set(tiles, i, j, tile);
         
         y_j = y_j + tile_size;
     }
