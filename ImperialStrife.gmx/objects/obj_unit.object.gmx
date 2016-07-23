@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>selected = false;
+            <string>is_selected = false;
 </string>
           </argument>
         </arguments>
@@ -48,7 +48,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>selected = false;
+            <string>if (is_selected == true)
+{
+    is_selected = false;
+    with (sel_sprite)
+    {
+        instance_destroy();
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -71,7 +78,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>selected = true;
+            <string>if (is_selected == false)
+{
+    is_selected = true;
+    sel_sprite = instance_create(x, y, obj_selectedoverlay);
+}
 </string>
           </argument>
         </arguments>

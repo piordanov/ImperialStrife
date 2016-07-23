@@ -47,6 +47,7 @@
       <sprite>sprites\coast_d3</sprite>
       <sprite>sprites\coast_e0</sprite>
       <sprite>sprites\city</sprite>
+      <sprite>sprites\selected</sprite>
     </sprites>
     <sprites name="Units">
       <sprite>sprites\unit</sprite>
@@ -69,6 +70,7 @@
     <object>objects\obj_watertile</object>
     <object>objects\obj_coastoverlay</object>
     <object>objects\obj_city</object>
+    <object>objects\obj_selectedoverlay</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
