@@ -62,15 +62,19 @@
     <script>scripts\dir_y.gml</script>
   </scripts>
   <objects name="objects">
-    <object>objects\obj_landtile</object>
-    <object>objects\obj_map</object>
-    <object>objects\obj_camera</object>
-    <object>objects\obj_unit</object>
-    <object>objects\obj_tilebase</object>
-    <object>objects\obj_watertile</object>
-    <object>objects\obj_coastoverlay</object>
     <object>objects\obj_city</object>
-    <object>objects\obj_selectedoverlay</object>
+    <objects name="Units">
+      <object>objects\obj_unit</object>
+    </objects>
+    <objects name="MapUI">
+      <object>objects\obj_watertile</object>
+      <object>objects\obj_camera</object>
+      <object>objects\obj_map</object>
+      <object>objects\obj_landtile</object>
+      <object>objects\obj_selectedoverlay</object>
+      <object>objects\obj_coastoverlay</object>
+      <object>objects\obj_tilebase</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
