@@ -73,6 +73,7 @@ repeat (40)
     spawn_city(cells, irandom(width - 1), irandom(height - 1));
 }
 
+cities = ds_list_create();
 tiles = ds_grid_create(width, height);
 
 var x_i = 0;
@@ -89,6 +90,7 @@ for(i = 0; i &lt; ds_grid_width(cells); i++)
         case "CITY":
             tile = instance_create(x_i, y_j, obj_city);
             tile.type = "CITY";
+            ds_list_add(cities, tile);
             break;
         case "LAND":
             tile = instance_create(x_i, y_j, obj_landtile);

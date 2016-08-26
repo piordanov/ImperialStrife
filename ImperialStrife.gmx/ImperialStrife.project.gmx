@@ -75,6 +75,10 @@
       <object>objects\obj_coastoverlay</object>
       <object>objects\obj_tilebase</object>
     </objects>
+    <objects name="UnitManager">
+      <object>objects\obj_director</object>
+      <object>objects\obj_player</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
